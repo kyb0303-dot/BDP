@@ -66,6 +66,21 @@ year_line_change.coalesce(1).write \
 .csv("/user/maria_dev/result_year_line_change")
 
 
+# Number of people by station on subay line 4
+line4_202604_rank = spark.sql("""
+SELECT station, CAST( AVG(total_passenger) AS INT) AS avg_passenger
+FROM subway
+WHERE line LIKE '4%' AND use_date LIKE '202604%'
+GROUP BY station
+ORDER BY avg_passenger DESC """)
+
+
+line4_202604_rank.coalesce(1).write \
+.option("header","true") \
+.option("encoding","UTF-8") \
+.mode("overwrite") \
+.csv("/user/maria_dev/result_line4_rank")
+
 
 
 

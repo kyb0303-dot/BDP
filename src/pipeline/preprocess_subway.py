@@ -50,7 +50,7 @@ df = df.withColumn("year", substring("use_date", 1, 4))
 df = df.withColumn("month", substring("use_date", 5, 2))
 df = df.withColumn("day", substring("use_date", 7, 2))
 df = df.withColumn("total_passenger", col("ride") + col("alight"))
-
+df = df.drop("reg_date")
 df.write.option("header", "true") \
     .option("encoding", "UTF-8") \
     .mode("overwrite") \
