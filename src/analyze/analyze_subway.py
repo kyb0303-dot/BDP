@@ -14,8 +14,9 @@ df.createOrReplaceTempView("subway")
 
 # station peaple top 10 by year
 year_station_top = spark.sql("""
-SELECT year, station, total_passenger
+SELECT year, station, total_passenger, daily_avg_passenger
 FROM(SELECT year, station, SUM(total_passenger) AS total_passenger,
+    CAST(SUM(total_passenger) / COUNT(DISTINCT use_date) AS INT) AS daily_avg_passenger,
     ROW_NUMBER() OVER(
         PARTITION BY year
         ORDER BY SUM(total_passenger) DESC) AS rrank
@@ -34,8 +35,9 @@ year_station_top.coalesce(1).write \
 
 # the  most people station by subway line
 year_line_top = spark.sql("""
-SELECT year, line, station, total_passenger
+SELECT year, line, station, total_passenger, daily_avg_passenger
 FROM(SELECT year, line, station, SUM(total_passenger) AS total_passenger,
+    CAST(SUM(total_passenger) / COUNT(DISTINCT use_date) AS INT) AS daily_avg_passenger,
     ROW_NUMBER() OVER(
         PARTITION BY year, line
         ORDER BY SUM(total_passenger) DESC) AS rannk
@@ -54,7 +56,8 @@ year_line_top.coalesce(1).write \
 
 # Changes in people by year and subway line
 year_line_change = spark.sql("""
-SELECT year, line, SUM(total_passenger) AS total_passenger
+SELECT year, line, SUM(total_passenger) AS total_passenger,
+    CAST(SUM(total_passenger) / COUNT(DISTINCT use_date) AS INT) AS daily_avg_passenger
 FROM subway
 GROUP BY year, line
 ORDER BY year, line""")
@@ -64,7 +67,6 @@ year_line_change.coalesce(1).write \
 .option("encoding","UTF-8") \
 .mode("overwrite") \
 .csv("/user/maria_dev/result_year_line_change")
-
 
 # Number of people by station on subay line 4
 line4_202604_rank = spark.sql("""
@@ -87,23 +89,5 @@ line4_202604_rank.coalesce(1).write \
 
 
 
-
-year_total.coalesce(1).write \
-.option("header","true") \
-.option("encoding","UTF-8") \
-.mode("overwrite") \
-.csv("/user/maria_dev/result_year_total")
-
-line_top.coalesce(1).write \
-.option("header","true") \
-.option("encoding","UTF-8") \
-.mode("overwrite") \
-.csv("/user/maria_dev/result_line_top")
 print("Analysis completed.")
-
-
-
-
-
-p
 

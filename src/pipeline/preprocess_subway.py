@@ -8,7 +8,6 @@ df_old = spark.read.csv(
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_2015.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_2016.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_2017.csv",
-        "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_2017.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_2018.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_2019.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_2020.csv",
@@ -21,6 +20,9 @@ df_old = spark.read.csv(
 
 df_new = spark.read.csv(
     [
+        "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202501.csv",
+        "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202502.csv",
+        "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202503.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202504.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202505.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202506.csv",
