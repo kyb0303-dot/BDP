@@ -14,14 +14,14 @@
    (https://www.data.go.kr/data/15071921/fileData.do#)
 
    
-3. 기술 스택
+2. 기술 스택
    HDFS : 원본 데이터 저장
    Apache Spark : 데이터 전처리
    Spark SQL : 데이터 분석
    Python : 결과 데이터 처리
    Matplotlib : 데이터 시각화
 
-5. 구현계획
+3. 구현계획
 
    데이터 수집
       - 공공데이터포털에서 지하철 승하차 데이터 수집
