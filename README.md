@@ -15,11 +15,11 @@
 
    
 2. 기술 스택
-   HDFS : 원본 데이터 저장
-   Apache Spark : 데이터 전처리
-   Spark SQL : 데이터 분석
-   Python : 결과 데이터 처리
-   Matplotlib : 데이터 시각화
+   - HDFS : 원본 데이터 저장
+   - Apache Spark : 데이터 전처리
+   - Spark SQL : 데이터 분석
+   - Python : 결과 데이터 처리
+   - Matplotlib : 데이터 시각화
 
 3. 구현계획
 
