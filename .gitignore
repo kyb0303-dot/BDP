@@ -1,0 +1,4 @@
+data/*.csv
+!data/sample_subway.csv
+*.zip
+data/raw/
