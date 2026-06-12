@@ -18,10 +18,15 @@ df_old = spark.read.csv(
     header = True, inferSchema=True, encoding="cp949"
 )
 
+df_202502 = spark.read.csv(
+     "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202502.csv",
+     header=True,
+     inferSchema=True,
+     encoding="cp949"
+     )
 df_new = spark.read.csv(
     [
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202501.csv",
-        "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202502.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202503.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202504.csv",
         "/user/maria_dev/subway_project/CARD_SUBWAY_MONTH_202505.csv",
@@ -39,8 +44,9 @@ df_new = spark.read.csv(
     ],
     header=True, inferSchema=True, encoding="UTF-8"
 )
-df = df_old.unionByName(df_new)
 
+
+df = df_old.unionByName(df_202502).unionByName(df_new)
 
 
 df = df.toDF("use_date", "line", "station", "ride", "alight", "reg_date")
